@@ -1,0 +1,53 @@
+:root {
+    --black-0: rgba(14, 13, 13, 0);
+    --black-100: rgba(14, 13, 13, 1);
+    --white: rgba(255, 255, 255, 1);
+    --white-highlighted: rgba(255, 255, 255, 0.2);
+    --text-white: #bebebe;
+    --text-unhovered: #616161;
+    --text-hovered: #ffffff;
+    --seperator: rgba(190, 190, 190, 0.2);
+    --muted: rgba(0, 0, 0, 0.7);
+    --red: rgba(138, 0, 0, 0.7);
+    --green: rgba(20, 90, 0, 0.7);
+    --transparent: rgba(0, 0, 0, 0);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.br2 {
+    padding: 2px;
+}
+
+.br5 {
+    padding: 5px;
+}
+
+.br8 {
+    padding: 8px;
+}
+
+
+

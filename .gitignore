@@ -1,0 +1,23 @@
+# Ignore PyCharm project files
+.idea/
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore Python cache files
+__pycache__/
+
+# Ignore environment files
+*.env
+.env
+.venv/
+
+# Ignore secret files
+.env
+*.env
+
+# Backups
+backup/
+
+# Ignore playgrounds
+playground.py

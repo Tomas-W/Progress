@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+{% block scripts %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home/home.css') }}">
+{% endblock %}
+
+{% if get_flashed_messages() %}
+    <div class="flash-wrapper">
+        <p class="flash-text">{{ get_flashed_messages()[0] }}</p>
+    </div>
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+main {
+    min-height: calc(100vh - 250px);
+}
+
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 95vw;
+    padding-bottom: 10px;
+    margin: 40px auto;
+    border-bottom: 1px solid var(--seperator);
+}
+
+.header {
+    font-size: 32px;
+}
+
+.flash-wrapper {
+    margin-bottom: 20px;
+    text-align: center;
+    font-style: italic;
+}
+
+.flash-text {
+    font-size: 1.2rem;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    margin: 100px 0 25px 0;
+    font-size: 12px;
+    color: var(--text-white);
+
+}
+
+
+@media (max-width: 576px) {
+    .header {
+        font-size: 26px;
+    }
+}

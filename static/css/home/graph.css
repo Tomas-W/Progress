@@ -1,0 +1,126 @@
+.graph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 3%;
+    box-sizing: border-box;
+}
+
+.graph-image {
+    display: block;
+    width: calc(100% - 40px);
+    max-width: 1000px;
+    height: auto;
+    margin: 0 auto;
+    background: transparent;
+}
+
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 50px;
+    grid-row-gap: 30px;
+    margin-top: 50px;
+}
+
+.top-buttons {
+    grid-column: 1 / -1;  /* This is correct */
+    display: flex;        /* Change from grid to flex */
+    gap: 50px;
+    width: 100%;
+}
+
+.show-30-button,
+.show-all-button {
+    flex: 1;             /* Make buttons take equal space */
+}
+
+.month-button {
+    display: block;
+    padding: 10px 15px;
+    text-align: center;
+    border-radius: 5px;
+    color: var(--text-unhovered);
+    border: 1px solid var(--text-unhovered);
+    cursor: not-allowed;
+}
+
+.month-button.highlighted {
+    color: var(--text-hovered);
+    cursor: pointer;
+    border: 1px solid var(--text-hovered);
+}
+
+.month-button.highlighted:hover {
+    background-color: var(--white-highlighted);
+}
+
+.is_current_month {
+    font-weight: bold;
+    background-color: var(--white-highlighted);
+}
+
+.show-all-container {
+    max-width: 80%;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.show-all-container .month-button {
+    width: 591px;
+}
+
+.month-short {
+    display: none;
+}
+
+
+@media (max-width: 425px) {
+    .top-buttons {
+        gap: 15px;
+    }
+    .month-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 15px;
+        grid-row-gap: 15px;
+    }
+    .month-button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    .month-long {
+        display: none;
+    }
+    .month-short {
+        display: inline;
+    }
+}
+
+@media (min-width: 425px) and (max-width: 576px) {
+    .top-buttons {
+        gap: 15px;
+    }
+    .month-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 15px;
+        grid-row-gap: 15px;
+    }
+    .month-button {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+
+}
+
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .weight-graph-title {
+        font-size: 20px;
+    }
+    .month-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 30px;
+    }
+
+}
