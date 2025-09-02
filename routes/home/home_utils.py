@@ -6,6 +6,7 @@ def get_2025_weight_dict() -> dict[str, str]:
     data = {
         "July": "weight_july_2025_",
         "August": "weight_august_2025_",
+        "September": "weight_september_2025_",
     }
     return data
 
@@ -15,6 +16,7 @@ def get_2025_calories_dict() -> dict[str, str]:
     data = {
         "July": "calories_july_2025_",
         "August": "calories_august_2025_",
+        "September": "calories_september_2025_",
     }
     return data
 
