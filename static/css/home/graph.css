@@ -21,19 +21,20 @@
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 50px;
     grid-row-gap: 30px;
+    width: 96%;
     margin-top: 50px;
 }
 
 .top-buttons {
-    grid-column: 1 / -1;  /* This is correct */
-    display: flex;        /* Change from grid to flex */
+    grid-column: 1 / -1;
+    display: flex;
     gap: 50px;
     width: 100%;
 }
 
 .show-30-button,
 .show-all-button {
-    flex: 1;             /* Make buttons take equal space */
+    flex: 1;
 }
 
 .month-button {
@@ -61,20 +62,9 @@
     background-color: var(--white-highlighted);
 }
 
-.show-all-container {
-    max-width: 80%;
-    margin-top: 50px;
-    margin-bottom: 30px;
-}
-
-.show-all-container .month-button {
-    width: 591px;
-}
-
 .month-short {
     display: none;
 }
-
 
 @media (max-width: 425px) {
     .top-buttons {
@@ -110,17 +100,11 @@
         padding: 8px 10px;
         font-size: 14px;
     }
-
 }
 
-
 @media (min-width: 576px) and (max-width: 768px) {
-    .weight-graph-title {
-        font-size: 20px;
-    }
     .month-grid {
         grid-template-columns: repeat(3, 1fr);
         grid-column-gap: 30px;
     }
-
 }

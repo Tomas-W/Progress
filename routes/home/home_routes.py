@@ -1,14 +1,18 @@
 from flask import (
     Blueprint,
     render_template,
+    request,
 )
 from typing import Final
 
 from .home_utils import (
-    get_2025_calories_dict,
-    get_2025_weight_dict,
-    get_calories_image_paths,
-    get_weight_image_paths,
+    get_all_calories_months,
+    get_all_insta_months,
+    get_all_weight_months,
+    get_calories_image_path,
+    get_insta_image_paths,
+    get_insta_title,
+    get_weight_image_path,
     get_image_title
 )
 from utils.misc import login_required
@@ -30,72 +34,70 @@ def home():
 
 
 @home_bp.route(CFG.route.weight, methods=["GET"])
-@home_bp.route(f"{CFG.route.weight}/<month>", methods=["GET"])
 @login_required
-def weight(month=None):
+def weight():
     """Displays weight images and month selection."""
-    path_s, path_l = get_weight_image_paths(month)
-    title = get_image_title(path_s, month)
-    months2025 = get_2025_weight_dict()
+    month = request.args.get('month')
+    year = request.args.get('year')
+    
+    img_path = get_weight_image_path(year, month)
+    title = get_image_title(img_path, month)
+    all_months = get_all_weight_months()
     url = CFG.redirect.weight
-
+    
     return render_template(
         CFG.template.graph,
         title=title,
-        path_s=path_s,
-        path_l=path_l,
-        months2025=months2025,
-        current_month=month,
+        img_path=img_path,
+        all_months=all_months,
+        selected_year=year,
+        selected_month=month,
         url=url,
     )
 
 
 @home_bp.route(CFG.route.calories, methods=["GET"])
-@home_bp.route(f"{CFG.route.calories}/<month>", methods=["GET"])
 @login_required
-def calories(month=None):
-    """Displays weight images and month selection."""
-    path_s, path_l = get_calories_image_paths(month)
-    title = get_image_title(path_s, month)
-    months2025 = get_2025_calories_dict()
+def calories():
+    """Displays calories images and month selection."""
+    month = request.args.get('month')
+    year = request.args.get('year')
+    
+    img_path = get_calories_image_path(year, month)
+    title = get_image_title(img_path, month)
+    all_months = get_all_calories_months()
     url = CFG.redirect.calories
-
+    
     return render_template(
         CFG.template.graph,
         title=title,
-        path_s=path_s,
-        path_l=path_l,
-        months2025=months2025,
-        current_month=month,
+        img_path=img_path,
+        all_months=all_months,
+        selected_year=year,
+        selected_month=month,
         url=url,
     )
 
 
-
 @home_bp.route(CFG.route.insta, methods=["GET"])
-@home_bp.route(f"{CFG.route.insta}/<month>", methods=["GET"])
 @login_required
-def insta(month=None):
+def insta():
     """Displays insta page."""
-    img1 = "images/insta_left_september_2025.png"
-    img2 = "images/insta_body_september_2025.png"
-    img3 = "images/insta_right_september_2025.png"
-    title = "September"
-    months2025 = {
-        "September": "September"
-    }
+    month = request.args.get('month')
+    year = request.args.get('year')
+    
+    left, body, right = get_insta_image_paths(year, month)
+    title = get_insta_title(year, month)
+    all_months = get_all_insta_months()
     url = CFG.redirect.insta
-
-    # For debugging
-    logger.info(f"Current month: {month}")  # This will help us see what's being passed
 
     return render_template(
         CFG.template.insta,
-        img1=img1,
-        img2=img2,
-        img3=img3,
+        img_left=left,
+        img_body=body,
+        img_right=right,
         title=title,
-        months2025=months2025,
-        current_month=month,  # This should now work correctly
+        all_months=all_months,
+        selected_month=month,
         url=url,
     )

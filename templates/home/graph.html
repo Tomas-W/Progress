@@ -2,8 +2,8 @@
 
 {% block main_content %}
 
-{% set all_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %}
-{% set all_months_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] %}
+{% set months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %}
+{% set months_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] %}
 
 {% block scripts %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home/graph.css') }}">
@@ -14,29 +14,19 @@
       <p class="header">{{ title }}</p>
     </div>
 
-    <picture>
-      <source media="(min-width: 768px)" srcset="{{ url_for('static', filename=path_l) }}">
-      <source media="(max-width: 767px)" srcset="{{ url_for('static', filename=path_s) }}">
-      <img src="{{ url_for('static', filename=path_s) }}" alt="Progress Graph" class="graph-image">
-    </picture>
+    <img src="{{ url_for('static', filename=img_path) }}" alt="Progress Graph" class="graph-image">
 
     <div class="month-grid">
       <div class="top-buttons">
-        <a href="{{ url_for(url, month='last_30') }}" class="month-button highlighted show-30-button {% if current_month == 'last_30' %}is_current_month{% endif %}">Last 30</a>
-        <a href="{{ url_for(url) }}" class="month-button highlighted show-all-button {% if current_month == None %}is_current_month{% endif %}">All</a>
+        <a href="{{ url_for(url, month='last_30') }}" class="month-button highlighted show-30-button {% if selected_month == 'last_30' %}is_current_month{% endif %}">Last 30</a>
+        <a href="{{ url_for(url) }}" class="month-button highlighted show-all-button {% if selected_month == None %}is_current_month{% endif %}">All</a>
       </div>
-      {% for month in all_months %}
-        {% if month in months2025.keys() %}
-          <a href="{{ url_for(url, month=month) }}" class="month-button highlighted {% if month == current_month %}is_current_month{% endif %}">
-            <span class="month-long">{{ month }}</span>
-            <span class="month-short">{{ all_months_short[loop.index0] }}</span>
-          </a>
-        {% else %}
-          <span class="month-button">
-            <span class="month-long">{{ month }}</span>
-            <span class="month-short">{{ all_months_short[loop.index0] }}</span>
-          </span>
-        {% endif %}
+      {% for item in all_months %}
+        {% set month, year = item %}
+        <a href="{{ url_for(url, year=year, month=month) }}" class="month-button highlighted {% if month == selected_month %}is_current_month{% endif %}">
+            <span class="month-long">{{ month }} {{ year }}</span>
+            <span class="month-short">{{ month[:3] }} {{ year }}</span>
+        </a>
       {% endfor %}
     </div>
   </div>
