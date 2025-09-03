@@ -4,18 +4,12 @@ from enum import Enum
 from flask import (
     Flask, 
 )
-from typing import Final
 
 from routes.landing.landing_route import landing_bp
 from routes.home.home_routes import home_bp
 from routes.admin.admin_routes import admin_bp
 
 from utils.config import CFG
-
-
-DEFAULT_CACHE_DURATION: Final = 60
-STATIC_CACHE_DURATION: Final = CFG.server.STATIC_CACHE_DURATION
-API_CACHE_DURATION: Final = CFG.server.API_CACHE_DURATION
 
 
 def get_app() -> Flask:

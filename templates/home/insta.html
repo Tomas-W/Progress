@@ -2,9 +2,6 @@
 
 {% block main_content %}
 
-{% set months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %}
-{% set months_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] %}
-
 {% block scripts %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home/insta.css') }}">
 {% endblock %}
@@ -18,6 +15,7 @@
       <div class="top-buttons">
         <a href="{{ url_for(url) }}" class="month-button highlighted show-all-button {% if selected_month == None %}is_current_month{% endif %}">All</a>
       </div>
+
       {% for item in all_months %}
         {% set month, year = item %}
         <a href="{{ url_for(url, year=year, month=month) }}" class="month-button highlighted {% if month == selected_month %}is_current_month{% endif %}">
@@ -28,9 +26,9 @@
     </div>
 
     <div class="image-grid">
-      <img src="{{ url_for('static', filename=img_left) }}" alt="Left Bicep Progress" class="insta-image">
-      <img src="{{ url_for('static', filename=img_body) }}" alt="Body Progress" class="insta-image">
-      <img src="{{ url_for('static', filename=img_right) }}" alt="Right Bicep Progress" class="insta-image">
+      <img src="{{ url_for('static', filename=img_left) }}" alt="Left Bicep" class="insta-image">
+      <img src="{{ url_for('static', filename=img_body) }}" alt="Body" class="insta-image">
+      <img src="{{ url_for('static', filename=img_right) }}" alt="Right Bicep" class="insta-image">
     </div>
   </div>
 

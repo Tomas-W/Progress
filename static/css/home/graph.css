@@ -9,11 +9,10 @@
 
 .graph-image {
     display: block;
-    width: calc(100% - 40px);
+    width: 100%;
     max-width: 1000px;
-    height: auto;
     margin: 0 auto;
-    background: transparent;
+    padding: 0 2% 0 0;
 }
 
 .month-grid {
@@ -22,6 +21,7 @@
     grid-column-gap: 50px;
     grid-row-gap: 30px;
     width: 96%;
+    max-width: 1000px;
     margin-top: 50px;
 }
 
@@ -41,16 +41,15 @@
     display: block;
     padding: 10px 15px;
     text-align: center;
-    border-radius: 5px;
     color: var(--text-unhovered);
     border: 1px solid var(--text-unhovered);
-    cursor: not-allowed;
+    border-radius: 5px;
 }
 
 .month-button.highlighted {
     color: var(--text-hovered);
-    cursor: pointer;
     border: 1px solid var(--text-hovered);
+    cursor: pointer;
 }
 
 .month-button.highlighted:hover {
@@ -75,10 +74,6 @@
         grid-column-gap: 15px;
         grid-row-gap: 15px;
     }
-    .month-button {
-        padding: 10px 20px;
-        font-size: 16px;
-    }
     .month-long {
         display: none;
     }
@@ -96,9 +91,11 @@
         grid-column-gap: 15px;
         grid-row-gap: 15px;
     }
-    .month-button {
-        padding: 8px 10px;
-        font-size: 14px;
+    .month-long {
+        display: none;
+    }
+    .month-short {
+        display: inline;
     }
 }
 

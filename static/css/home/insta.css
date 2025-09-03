@@ -1,10 +1,10 @@
 .insta-container {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     padding: 0 3%;
-    box-sizing: border-box;
 }
 
 .month-grid {
@@ -17,8 +17,8 @@
 }
 
 .top-buttons {
-    grid-column: 1 / -1;
     display: flex;
+    grid-column: 1 / -1;
     gap: 50px;
     width: 100%;
 }
@@ -31,16 +31,15 @@
     display: block;
     padding: 10px 15px;
     text-align: center;
-    border-radius: 5px;
     color: var(--text-unhovered);
     border: 1px solid var(--text-unhovered);
-    cursor: not-allowed;
+    border-radius: 5px;
 }
 
 .month-button.highlighted {
     color: var(--text-hovered);
-    cursor: pointer;
     border: 1px solid var(--text-hovered);
+    cursor: pointer;
 }
 
 .month-button.highlighted:hover {
@@ -76,6 +75,9 @@
 }
 
 @media (max-width: 425px) {
+    .insta-container {
+        padding: 0 4%;
+    }
     .top-buttons {
         gap: 15px;
     }

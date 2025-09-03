@@ -6,14 +6,14 @@ from flask import (
 from typing import Final
 
 from .home_utils import (
-    get_all_calories_months,
-    get_all_insta_months,
-    get_all_weight_months,
-    get_calories_image_path,
-    get_insta_image_paths,
+    get_calories_months,
+    get_insta_months,
+    get_weight_months,
+    get_calories_path,
+    get_insta_paths,
     get_insta_title,
-    get_weight_image_path,
-    get_image_title
+    get_weight_path,
+    _get_title
 )
 from utils.misc import login_required
 from utils.config import CFG
@@ -21,7 +21,6 @@ from utils.logger import logger
 
 
 home_bp = Blueprint("home", __name__)
-CACHE_DURATION: Final = 3600
 
 
 @home_bp.route(CFG.route.home, methods=["GET"])
@@ -40,9 +39,9 @@ def weight():
     month = request.args.get('month')
     year = request.args.get('year')
     
-    img_path = get_weight_image_path(year, month)
-    title = get_image_title(img_path, month)
-    all_months = get_all_weight_months()
+    img_path = get_weight_path(year, month)
+    title = _get_title(img_path, month)
+    all_months = get_weight_months()
     url = CFG.redirect.weight
     
     return render_template(
@@ -63,9 +62,9 @@ def calories():
     month = request.args.get('month')
     year = request.args.get('year')
     
-    img_path = get_calories_image_path(year, month)
-    title = get_image_title(img_path, month)
-    all_months = get_all_calories_months()
+    img_path = get_calories_path(year, month)
+    title = _get_title(img_path, month)
+    all_months = get_calories_months()
     url = CFG.redirect.calories
     
     return render_template(
@@ -86,9 +85,9 @@ def insta():
     month = request.args.get('month')
     year = request.args.get('year')
     
-    left, body, right = get_insta_image_paths(year, month)
+    left, body, right = get_insta_paths(year, month)
     title = get_insta_title(year, month)
-    all_months = get_all_insta_months()
+    all_months = get_insta_months()
     url = CFG.redirect.insta
 
     return render_template(
