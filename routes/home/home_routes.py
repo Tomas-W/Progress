@@ -69,3 +69,33 @@ def calories(month=None):
         current_month=month,
         url=url,
     )
+
+
+
+@home_bp.route(CFG.route.insta, methods=["GET"])
+@home_bp.route(f"{CFG.route.insta}/<month>", methods=["GET"])
+@login_required
+def insta(month=None):
+    """Displays insta page."""
+    img1 = "images/insta_left_september_2025.png"
+    img2 = "images/insta_body_september_2025.png"
+    img3 = "images/insta_right_september_2025.png"
+    title = "September"
+    months2025 = {
+        "September": "September"
+    }
+    url = CFG.redirect.insta
+
+    # For debugging
+    logger.info(f"Current month: {month}")  # This will help us see what's being passed
+
+    return render_template(
+        CFG.template.insta,
+        img1=img1,
+        img2=img2,
+        img3=img3,
+        title=title,
+        months2025=months2025,
+        current_month=month,  # This should now work correctly
+        url=url,
+    )

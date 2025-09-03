@@ -21,6 +21,15 @@ def get_2025_calories_dict() -> dict[str, str]:
     return data
 
 
+def get_2025_insta_dict() -> dict[str, str]:
+    """Returns a dictionary of insta image paths for 2025."""
+    data = {
+        "September": "insta_september_2025_",
+    }
+    return data
+
+
+
 
 def get_weight_image_paths(month: str | None) -> tuple[str, str]:
     """Returns a tuple of weight image paths for a given month."""
@@ -52,10 +61,24 @@ def get_calories_image_paths(month: str | None) -> tuple[str, str]:
     return path_s, path_l
 
 
-def get_image_title(path_s: str, month: str) -> str:
+def get_image_title(path_s: str, month: str | None) -> str:
     """Returns the capitalized month of the weight image path."""
+    if month is None:
+        return "All"
+    
     if month == "last_30":
         return "Last 30"
-    if month not in all_months:
+    
+    if month in all_months:
         return " ".join(path_s.split("/")[-1].split("_")[1:-1]).title()
-    return " ".join(path_s.split("/")[-1].split("_")[1:-1]).title()
+    
+    else:
+        return "Error"
+
+
+def get_insta_title(month: str | None) -> str:
+    """Returns the capitalized month of the insta image path."""
+    if month is None:
+        return "All"
+    
+    return month

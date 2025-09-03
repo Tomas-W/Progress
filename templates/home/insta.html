@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+{% set all_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %}
+{% set all_months_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] %}
+
+{% block scripts %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home/insta.css') }}">
+{% endblock %}
+
+  <div class="insta-container">
+    <div class="header-wrapper">
+      <p class="header">{{ title }}</p>
+    </div>
+
+    <div class="month-grid">
+      <div class="top-buttons">
+        <a href="{{ url_for(url) }}" class="month-button highlighted show-all-button {% if current_month == None %}is_current_month{% endif %}">All</a>
+      </div>
+      {% for month in all_months %}
+        {% if month in months2025.keys() %}
+          <a href="{{ url_for(url, month=month) }}" class="month-button highlighted {% if month == current_month %}is_current_month{% endif %}">
+            <span class="month-long">{{ month }}</span>
+            <span class="month-short">{{ all_months_short[loop.index0] }}</span>
+          </a>
+        {% else %}
+          <span class="month-button">
+            <span class="month-long">{{ month }}</span>
+            <span class="month-short">{{ all_months_short[loop.index0] }}</span>
+          </span>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="image-grid">
+      <img src="{{ url_for('static', filename=img1) }}" alt="Body Progress" class="insta-image">
+      <img src="{{ url_for('static', filename=img2) }}" alt="Left Bicep Progress" class="insta-image">
+      <img src="{{ url_for('static', filename=img3) }}" alt="Right Bicep Progress" class="insta-image">
+    </div>
+  </div>
+
+{% endblock %}

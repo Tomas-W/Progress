@@ -1,0 +1,130 @@
+.insta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 3%;
+    box-sizing: border-box;
+}
+
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 50px;
+    grid-row-gap: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.top-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 50px;
+    width: 100%;
+}
+
+.show-all-button {
+    flex: 1;
+}
+
+.month-button {
+    display: block;
+    padding: 10px 15px;
+    text-align: center;
+    border-radius: 5px;
+    color: var(--text-unhovered);
+    border: 1px solid var(--text-unhovered);
+    cursor: not-allowed;
+}
+
+.month-button.highlighted {
+    color: var(--text-hovered);
+    cursor: pointer;
+    border: 1px solid var(--text-hovered);
+}
+
+.month-button.highlighted:hover {
+    background-color: var(--white-highlighted);
+}
+
+.is_current_month {
+    font-weight: bold;
+    background-color: var(--white-highlighted);
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 95%;
+    max-width: 1200px;
+}
+
+.insta-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.insta-image[src*="insta_left"],
+.insta-image[src*="insta_right"] {
+    transform: scaleX(-1);
+}
+
+.month-short {
+    display: none;
+}
+
+@media (max-width: 425px) {
+    .top-buttons {
+        gap: 15px;
+    }
+    .month-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 15px;
+        grid-row-gap: 15px;
+    }
+    .month-button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    .month-long {
+        display: none;
+    }
+    .month-short {
+        display: inline;
+    }
+    .image-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (min-width: 425px) and (max-width: 576px) {
+    .top-buttons {
+        gap: 15px;
+    }
+    .month-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 15px;
+        grid-row-gap: 15px;
+    }
+    .month-button {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .month-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 30px;
+    }
+    .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

@@ -97,7 +97,7 @@ class Routes:
     home: str = "/home"
     weight: str = "/weight"
     calories: str = "/calories"
-    requests: str = "/admin/requests"
+    insta: str = "/insta"
     add_user: str = "/admin/add-user"
 
 
@@ -108,7 +108,7 @@ class Templates:
     graph: str = "home/graph.html"
     weight: str = "home/weight.html"
     calories: str = "home/calories.html"
-    requests: str = "admin/requests.html"
+    insta: str = "home/insta.html"
     add_user: str = "admin/add_user.html"
 
 
@@ -118,7 +118,7 @@ class Redirects:
     home: str = "home.home"
     weight: str = "home.weight"
     calories: str = "home.calories"
-    requests: str = "admin.requests"
+    insta: str = "home.insta"
     add_user: str = "admin.add_user"
 
 
