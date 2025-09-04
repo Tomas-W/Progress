@@ -4,13 +4,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
 {% endblock %}
 
+{% if url %}
+    {% set endpoint = url.split('.')[-1] %}
+{% endif %}
+
+
 <nav id="site-nav">
     <ul>
-        <li><a href="{{ url_for('home.weight') }}" class="nav-link">Weight</a></li>
-        <li><a href="{{ url_for('home.calories') }}" class="nav-link">Calories</a></li>
-        <!-- <li><a href="#" class="nav-link">Both</a></li>
-        <li><a href="#" class="nav-link">Workouts</a></li> -->
-        <li><a href="{{ url_for('home.insta') }}" class="nav-link">Insta</a></li>
+        <li><a href="{{ url_for('home.weight') }}" class="nav-link {% if endpoint == 'weight' %}is_current{% endif %}">Weight</a></li>
+        <li><a href="{{ url_for('home.calories') }}" class="nav-link {% if endpoint == 'calories' %}is_current{% endif %}">Calories</a></li>
+        <li><a href="{{ url_for('home.both') }}" class="nav-link {% if endpoint == 'both' %}is_current{% endif %}">Both</a></li>
+        <!-- <li><a href="#" class="nav-link">Workouts</a></li> -->
+        <li><a href="{{ url_for('home.insta') }}" class="nav-link {% if endpoint == 'insta' %}active{% endif %}">Insta</a></li>
     </ul>
 </nav>
 

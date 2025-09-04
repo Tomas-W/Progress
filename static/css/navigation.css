@@ -18,6 +18,10 @@ nav li {
     text-decoration: none;
 }
 
+.is_current {
+    color: var(--text-hovered);
+    font-weight: bold;
+}
 
 @media (max-width: 576px) {
     .nav-link {

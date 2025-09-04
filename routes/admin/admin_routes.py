@@ -36,7 +36,7 @@ def add_user():
             logger.info(f"Added user: {username=}")
             flash(f"Added user: {username}")
         
-        return redirect(url_for("admin.add_user"))
+        return redirect(url_for(CFG.redirect.add_user))
     
     return render_template(
         CFG.template.add_user,
