@@ -15,7 +15,7 @@
         <li><a href="{{ url_for('home.calories') }}" class="nav-link {% if endpoint == 'calories' %}is_current{% endif %}">Calories</a></li>
         <li><a href="{{ url_for('home.both') }}" class="nav-link {% if endpoint == 'both' %}is_current{% endif %}">Both</a></li>
         <!-- <li><a href="#" class="nav-link">Workouts</a></li> -->
-        <li><a href="{{ url_for('home.insta') }}" class="nav-link {% if endpoint == 'insta' %}active{% endif %}">Insta</a></li>
+        <li><a href="{{ url_for('home.insta') }}" class="nav-link {% if endpoint == 'insta' %}is_current{% endif %}">Insta</a></li>
     </ul>
 </nav>
 

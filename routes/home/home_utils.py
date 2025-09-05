@@ -17,15 +17,16 @@ def get_image_path(year: str | None, month: str | None, dir: str) -> str:
     return path
 
 
-def get_insta_paths(year: str | None, month: str | None) -> tuple[str, str, str]:
+def get_insta_paths(year: str | None, month: str | None) -> tuple[str, str, str, str]:
     """Returns a tuple of insta image paths for a given month and year."""
     if month is None or year is None:
         month, year = get_insta_months_from_path(CFG.dir.INSTA)[0]
     
     left = f"{CFG.dir.INSTA_REL}/insta_left_{month.lower()}_{year}.png"
-    body = f"{CFG.dir.INSTA_REL}/insta_body_{month.lower()}_{year}.png"
+    back = f"{CFG.dir.INSTA_REL}/insta_back_{month.lower()}_{year}.png"
+    front = f"{CFG.dir.INSTA_REL}/insta_front_{month.lower()}_{year}.png"
     right = f"{CFG.dir.INSTA_REL}/insta_right_{month.lower()}_{year}.png"
-    return left, body, right
+    return left, back, front, right
 
 
 def get_title(path: str, month: str | None) -> str:

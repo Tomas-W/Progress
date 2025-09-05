@@ -105,7 +105,7 @@ def insta():
     month = request.args.get('month')
     year = request.args.get('year')
 
-    left, body, right = get_insta_paths(year, month)
+    left, back, front, right = get_insta_paths(year, month)
     title = get_insta_title(year, month)
     all_months = get_insta_months_from_path(CFG.dir.INSTA)
     url = CFG.redirect.insta
@@ -113,7 +113,8 @@ def insta():
     return render_template(
         CFG.template.insta,
         img_left=left,
-        img_body=body,
+        img_back=back,
+        img_front=front,
         img_right=right,
         title=title,
         all_months=all_months,
