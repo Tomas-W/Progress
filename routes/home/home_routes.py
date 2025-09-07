@@ -33,9 +33,6 @@ home_bp = Blueprint("home", __name__)
 @login_required
 def home():
     """Displays empty page."""
-    guess_date = datetime.now() + timedelta(days=1)
-    date = guess_date.strftime("%Y-%m-%d")
-    upstash.add_weight(70.5, date)
     return render_template(
         CFG.template.home,
     )
@@ -48,21 +45,21 @@ def weight():
     weight_guess_form = WeightGuessForm()
     if request.method == "POST":
         if weight_guess_form.validate_on_submit():
-            weight = weight_guess_form.weight.data
+            weight = float(weight_guess_form.weight.data)
             username = session["username"]
             guess_date = datetime.now() + timedelta(days=1)
             date = guess_date.strftime("%Y-%m-%d")
             upstash.add_weight_guess(username, date, weight)
 
             logger.info(f"Weight guess: {username=} {weight=}")
-            flash(f"Weight guesses: {upstash.weight_guesses_memory}")
             return redirect(url_for(CFG.redirect.weight))
         else:
             session["form_errors"] = weight_guess_form.errors
     
     guess_date, guess_weight = get_last_guess(session["username"])
     guess_result = upstash.get_weight(guess_date)
-    
+    flash(f"Guess result: {guess_result}\nGuess date: {guess_date}\nGuess weight: {guess_weight}")
+
     form_errors = session.pop("form_errors", None)
     month = request.args.get('month')
     year = request.args.get('year')

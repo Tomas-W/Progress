@@ -17,10 +17,10 @@ WEIGHT_GUESSES_PREFIX: Final = "guess_weight_"
 class Upstash:
     """Handles all data storage operations."""
     def __init__(self):
-        self.redis: Redis = None
+        self.redis: Redis | None = None
         self.users_memory: dict[str, str] = {}
         self.weights_memory: dict[str, float] = {}
-        self.weight_guesses_memory: dict[str, tuple[str, float]] = {}
+        self.weight_guesses_memory: dict[str, str] = {}
         self._init_redis()
         if self.redis is None:
             self.users_memory = {"test": "test", "test2": "test2"}
@@ -142,36 +142,46 @@ class Upstash:
     def _add_weight_guess_to_redis(self, username: str, date: str, weight: float) -> None:
         """Adds weight guess to Redis"""
         try:
-            self.redis.set(f"{WEIGHT_GUESSES_PREFIX}{username}", [date, weight])
-        
+            data = f"{date}|{weight}"
+            self.redis.set(f"{WEIGHT_GUESSES_PREFIX}{username}", data)
         except Exception as e:
             logger.error(f"Error adding weight guess to Redis: {e}")
-    
+            self._add_weight_guess_to_memory(username, date, weight)  # Fall back to memory storage
+
     def _add_weight_guess_to_memory(self, username: str, date: str, weight: float) -> None:
         """Adds weight guess to memory storage"""
-        self.weight_guesses_memory[f"{username}"] = [date, weight]
+        self.weight_guesses_memory[username] = f"{date}|{weight}"
     
-    def get_weight_guess(self, username: str) -> tuple[str, float] | None:
-        """Gets weight guess from Redis or memory fallback"""
+    def get_weight_guess(self, username: str) -> tuple[str | None, float | None]:
+        """Gets weight guess from Redis or memory fallback. Returns tuple of (date, weight)"""
         if self.redis:
             return self._get_weight_guess_from_redis(username)
         else:
             return self._get_weight_guess_from_memory(username)
     
-    def _get_weight_guess_from_redis(self, username: str) -> float | None:
+    def _get_weight_guess_from_redis(self, username: str) -> tuple[str | None, float | None]:
         """Gets weight guess from Redis"""
         try:
             result = self.redis.get(f"{WEIGHT_GUESSES_PREFIX}{username}")
-            return result
+            if result is None:
+                return None, None
+            
+            date_str, weight_str = result.split("|")
+            return date_str, float(weight_str)
         
         except Exception as e:
             logger.error(f"Error fetching weight guess from Redis: {e}")
             return None, None
-        
-    def _get_weight_guess_from_memory(self, username: str) -> tuple[str, float] | None:
+    
+    def _get_weight_guess_from_memory(self, username: str) -> tuple[str | None, float | None]:
         """Gets weight guess from memory storage"""
         try:
-            return self.weight_guesses_memory[f"{username}"]
+            result = self.weight_guesses_memory.get(username)
+            if result is None:
+                return None, None
+            
+            date_str, weight_str = result.split("|")
+            return date_str, float(weight_str)
         
         except Exception as e:
             logger.error(f"Error fetching weight guess from memory: {e}")

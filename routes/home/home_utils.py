@@ -24,10 +24,9 @@ class WeightGuessForm(FlaskForm):
     submit = SubmitField(label="Guess")
 
 
-def get_last_guess(username: str) -> tuple[str, float]:
+def get_last_guess(username: str) -> tuple[str | None, float | None]:
     """Returns the last guess for a given username."""
-    date, weight = upstash.get_weight_guess(username)
-    return date, weight
+    return upstash.get_weight_guess(username)
 
 
 def get_image_path(year: str | None, month: str | None, dir: str) -> str:
