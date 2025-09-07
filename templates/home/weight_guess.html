@@ -5,38 +5,56 @@
     <script defer src="{{ url_for('static', filename='js/weight.js') }}"></script>
 {% endblock %}
 
-<form method="POST" action="" novalidate class="weight-guess-form">
+<div class="weight-guess-wrapper">
+    
+    <form method="POST" action="" novalidate class="weight-guess-form">
+        <div class="form-item last-form-item">
+            <div class="input-error-wrapper">
+                {{ weight_guess_form.weight(class="form-input-field") }}
+                {% if weight_guess_form.errors["weight"] %}
+                    <div class="form-error">{{ weight_guess_form.errors["weight"][0] }}</div>
+                {% endif %}
+                <div class="form-label">{{ weight_guess_form.weight.label(class="form-label-color") }}</div>
+            </div>
+        </div>
 
-    <div class="form-item last-form-item">
-        <div class="input-error-wrapper">
-            {{ weight_guess_form.weight(class="form-input-field") }}
-            {% if weight_guess_form.errors["weight"] %}
-                <div class="form-error">{{ weight_guess_form.errors["weight"][0] }}</div>
-            {% endif %}
-            <div class="form-label">{{ weight_guess_form.weight.label(class="form-label-color") }}</div>
+        {{ weight_guess_form.username }}
+        {{ weight_guess_form.form_type }}
+        {{ weight_guess_form.hidden_tag() }}
+        <div class="form-devider"> 
+            {{ weight_guess_form.submit(class="form-btn") }}
+        </div>
+    </form>
+
+    <div class="guess-info-container">
+        <div class="guess-info-row">
+            <div class="guess-label">Date:</div>
+            <div class="guess-value">{{ guess_date if guess_date else "No guess" }}</div>
+        </div>
+        
+        <div class="guess-info-row">
+            <div class="guess-label">Guess:</div>
+            <div class="guess-value">
+                {% if guess_color %}
+                    <span class="guess-weight-colored" data-color="{{ guess_color }}">{{ guess_weight }}</span>
+                {% else %}
+                    {{ guess_weight if guess_weight else "No guess" }}
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="guess-info-row">
+            <div class="guess-label">Weight:</div>
+            <div class="guess-value">
+                {% if guess_result %}
+                    {{ guess_result }}
+                {% else %}
+                    Pending
+                {% endif %}
+            </div>
         </div>
     </div>
 
-    {{ weight_guess_form.username }}
-    {{ weight_guess_form.form_type }}
-    {{ weight_guess_form.hidden_tag() }}
-    <div class="form-devider"> 
-        {{ weight_guess_form.submit(class="form-btn") }}
-    </div>
-    
-</form>
-
-<p class="guess-view" data-label="Date:">{{ guess_date if guess_date else "No guess" }}</p>
-{% if guess_color %}
-    <p class="guess-view" data-label="Guess:"><span class="guess-weight-colored" data-color="{{ guess_color }}">{{ guess_weight }}</span></p>
-{% else %}
-    <p class="guess-view" data-label="Guess:">{{ guess_weight if guess_weight else "No guess" }}</p>
-{% endif %}
-
-{% if guess_result %}
-    <p class="guess-view" data-label="Weight:">{{ guess_result }}</p>
-{% else %}
-    <p class="guess-view" data-label="Weight:">Pending</p>
-{% endif %}
+</div>
 
 {% endblock %}
