@@ -1,4 +1,4 @@
-.add-user-form-wrapper {
+.admin-form-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-.add-user-form {
+.admin-form {
     display: flex;
     flex-direction: column;
     width: min(455px, 75vw);

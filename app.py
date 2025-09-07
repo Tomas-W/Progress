@@ -1,5 +1,8 @@
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from enum import Enum
 from flask import (
     Flask, 

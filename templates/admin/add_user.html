@@ -3,14 +3,14 @@
 {% block main_content %}
 
 {% block scripts %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/add_user.css') }}">
-    <script defer src="{{ url_for('static', filename='js/add_user.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin.css') }}">
+    <script defer src="{{ url_for('static', filename='js/admin.js') }}"></script>
 {% endblock %}
 
-<div class="add-user-form-wrapper">
+<div class="admin-form-wrapper">
 
     <div class="header-wrapper">
-        <p class="header">Add User</p>
+        <p class="header">{{ title }}</p>
     </div>
 
             {% if get_flashed_messages() %}
@@ -19,7 +19,7 @@
                 </div>
             {% endif %}
 
-            <form method="POST" action="" novalidate class="add-user-form">
+            <form method="POST" action="" novalidate class="admin-form">
 
                 <div class="form-item">
                     <div class="input-error-wrapper">

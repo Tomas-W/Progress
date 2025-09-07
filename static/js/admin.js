@@ -1,4 +1,4 @@
-const addUserForm = document.querySelector(".add-user-form");
+const addUserForm = document.querySelector(".admin-form");
 // Form input field animations
 const formInputs = document.querySelectorAll(".form-input-field");
 

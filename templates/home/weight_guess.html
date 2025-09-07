@@ -22,15 +22,15 @@
     <div class="form-devider"> 
         {{ weight_guess_form.submit(class="form-btn") }}
     </div>
-
     
 </form>
 
 <p class="guess-view" data-label="Guess date:">{{ guess_date if guess_date else "No guess" }}</p>
 <p class="guess-view" data-label="Guess:">{{ guess_weight if guess_weight else "No guess" }}</p>
 {% if guess_result %}
-<p class="guess-view" data-label="Result:">{{ guess_result }}</p>
+    <p class="guess-view" data-label="Result:">{{ guess_result }}</p>
 {% else %}
-<p class="guess-view" data-label="Result:">Pending</p>
+    <p class="guess-view" data-label="Result:">Pending</p>
 {% endif %}
+
 {% endblock %}

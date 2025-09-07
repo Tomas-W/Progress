@@ -43,8 +43,13 @@ def home():
 def weight():
     """Displays weight images and month selection."""
     weight_guess_form = WeightGuessForm()
+
     if request.method == "POST":
-        if weight_guess_form.validate_on_submit():
+
+        if not weight_guess_form.validate_on_submit():
+            session["form_errors"] = weight_guess_form.errors
+        
+        else:
             weight = float(weight_guess_form.weight.data)
             username = session["username"]
             guess_date = datetime.now() + timedelta(days=1)
@@ -53,12 +58,9 @@ def weight():
 
             logger.info(f"Weight guess: {username=} {weight=}")
             return redirect(url_for(CFG.redirect.weight))
-        else:
-            session["form_errors"] = weight_guess_form.errors
     
     guess_date, guess_weight = get_last_guess(session["username"])
     guess_result = upstash.get_weight(guess_date)
-    flash(f"Guess result: {guess_result}\nGuess date: {guess_date}\nGuess weight: {guess_weight}")
 
     form_errors = session.pop("form_errors", None)
     month = request.args.get('month')

@@ -2,10 +2,9 @@ import os
 
 from datetime import datetime
 
-from flask import session
 from flask_wtf import FlaskForm
 from wtforms import FloatField, HiddenField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, NumberRange
 
 from utils.upstash import upstash
 from utils.config import CFG
@@ -17,6 +16,7 @@ class WeightGuessForm(FlaskForm):
         render_kw={"placeholder": "Weight tomorrow?"},
         validators=[
             DataRequired(message="Weight is required"),
+            NumberRange(min=50, max=80, message="Lets be realistic.."),
         ]
     )
     username = HiddenField()

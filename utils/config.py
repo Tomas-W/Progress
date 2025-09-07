@@ -99,7 +99,9 @@ class Routes:
     calories: str = "/calories"
     both: str = "/both"
     insta: str = "/insta"
+
     add_user: str = "/admin/add-user"
+    add_weight: str = "/admin/add-weight"
 
 
 @dataclass
@@ -111,7 +113,9 @@ class Templates:
     calories: str = "home/calories.html"
     both: str = "home/both.html"
     insta: str = "home/insta.html"
+
     add_user: str = "admin/add_user.html"
+    add_weight: str = "admin/add_weight.html"
 
 
 @dataclass
@@ -122,7 +126,9 @@ class Redirects:
     calories: str = "home.calories"
     both: str = "home.both"
     insta: str = "home.insta"
+    
     add_user: str = "admin.add_user"
+    add_weight: str = "admin.add_weight"
 
 
 @dataclass
