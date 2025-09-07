@@ -23,6 +23,7 @@ from .home_utils import (
 )
 from utils.misc import login_required
 from utils.upstash import upstash
+from utils.logger import logger
 from utils.config import CFG
 
 
@@ -59,6 +60,7 @@ def weight():
     # Get data
     guess_date, guess_weight = get_last_guess(session["username"])
     guess_result = upstash.get_weight(guess_date)
+    logger.info(f"username: {session['username']}, Guess date: {guess_date}, Guess weight: {guess_weight}, Guess result: {guess_result}")
     # Generate colored result
     guess_color = ""
     if guess_weight is not None and guess_result is not None:
