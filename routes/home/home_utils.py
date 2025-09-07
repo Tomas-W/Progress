@@ -2,7 +2,32 @@ import os
 
 from datetime import datetime
 
+from flask import session
+from flask_wtf import FlaskForm
+from wtforms import FloatField, HiddenField, SubmitField
+from wtforms.validators import DataRequired
+
+from utils.upstash import upstash
 from utils.config import CFG
+
+
+class WeightGuessForm(FlaskForm):
+    weight = FloatField(
+        label="",
+        render_kw={"placeholder": "Weight tomorrow?"},
+        validators=[
+            DataRequired(message="Weight is required"),
+        ]
+    )
+    username = HiddenField()
+    form_type = HiddenField(default="weight_guess")
+    submit = SubmitField(label="Guess")
+
+
+def get_last_guess(username: str) -> tuple[str, float]:
+    """Returns the last guess for a given username."""
+    date, weight = upstash.get_weight_guess(username)
+    return date, weight
 
 
 def get_image_path(year: str | None, month: str | None, dir: str) -> str:

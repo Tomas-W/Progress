@@ -6,6 +6,13 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home/graph.css') }}">
 {% endblock %}
 
+{% if get_flashed_messages() %}
+      <div class="flash-wrapper">
+          <p class="flash-text">{{ get_flashed_messages()[0] }}</p>
+      </div>
+  {% endif %}
+    
+
   <div class="graph">
     <div class="header-wrapper">
       <p class="header">{{ title }}</p>
@@ -27,6 +34,11 @@
         </a>
       {% endfor %}
     </div>
+
+    {% if endpoint == 'weight' %}
+      {% include "home/weight_guess.html" %}
+    {% endif %}
+
   </div>
 
 {% endblock %}

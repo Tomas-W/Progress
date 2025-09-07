@@ -39,6 +39,9 @@ main {
 
 
 @media (max-width: 576px) {
+    .header-wrapper {
+        margin: 0 auto 25px auto;
+    }
     .header {
         font-size: 26px;
     }

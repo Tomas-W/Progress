@@ -4,11 +4,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
 {% endblock %}
 
-{% if url %}
-    {% set endpoint = url.split('.')[-1] %}
-{% endif %}
-
-
 <nav id="site-nav">
     <ul>
         <li><a href="{{ url_for('home.weight') }}" class="nav-link {% if endpoint == 'weight' %}is_current{% endif %}">Weight</a></li>

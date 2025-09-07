@@ -1,0 +1,36 @@
+{% block weight_guess %}
+
+{% block scripts %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/guess.css') }}">
+{% endblock %}
+
+<form method="POST" action="" novalidate class="weight-guess-form">
+
+    <div class="form-item last-form-item">
+        <div class="input-error-wrapper">
+            {{ weight_guess_form.weight(class="form-input-field") }}
+            {% if weight_guess_form.errors["weight"] %}
+                <div class="form-error">{{ weight_guess_form.errors["weight"][0] }}</div>
+            {% endif %}
+            <div class="form-label">{{ weight_guess_form.weight.label(class="form-label-color") }}</div>
+        </div>
+    </div>
+
+    {{ weight_guess_form.username }}
+    {{ weight_guess_form.form_type }}
+    {{ weight_guess_form.hidden_tag() }}
+    <div class="form-devider"> 
+        {{ weight_guess_form.submit(class="form-btn") }}
+    </div>
+
+    
+</form>
+
+<p class="guess-view" data-label="Guess date:">{{ guess_date }}</p>
+<p class="guess-view" data-label="Guess:">{{ guess_weight }}</p>
+{% if guess_result %}
+<p class="guess-view" data-label="Result:">{{ guess_result }}</p>
+{% else %}
+<p class="guess-view" data-label="Result:">Pending</p>
+{% endif %}
+{% endblock %}

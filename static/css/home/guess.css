@@ -1,0 +1,45 @@
+.weight-guess-form {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 40px 0;
+}
+
+.form-input-field {
+    width: 170px;
+    font-size: 1.3rem;
+}
+
+.form-devider {
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.form-btn {
+    padding: 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.guess-view {
+    display: grid;
+    grid-template-columns: 100px 100px;  /* Fixed width for both columns */
+    grid-column-gap: 30px;  /* This adds space between the columns */
+    margin: 8px 0;
+    font-size: 1.1rem;
+}
+
+.guess-view::before {
+    content: attr(data-label);
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Add this to right-align the values */
+.guess-view {
+    text-align: left;  /* This will right-align the values */
+}
+
+.guess-view::before {
+    text-align: left;   /* Keep labels left-aligned */
+    float: left;        /* Ensure label alignment */
+}
