@@ -39,12 +39,14 @@
 .form-error {
     position: absolute;
     right: 0;
-    top: 50%;
-    padding-right: 3px;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
     font-size: 1rem;
+    font-weight: bold;
     color: var(--red) !important;
     white-space: nowrap;
-    transform: translateY(-50%);
 }
 
 .form-label {

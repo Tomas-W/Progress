@@ -121,3 +121,28 @@ def get_insta_months_from_path(path: str) -> list[tuple[str, str]]:
     names = list(set([(name.split("_")[2].title(), name.split("_")[3]) 
             for name, _ in file_data]))
     return names
+
+
+def get_guess_color(guess_weight: float, actual_weight: float) -> str:
+    """
+    Returns a color string based on guess accuracy (green→yellow→red gradient).
+    """
+    diff = abs(guess_weight - actual_weight)
+    clamped_diff = min(diff, 3.0)
+    error_percentage = clamped_diff / 3.0
+    
+    # Green → Yellow 
+    if error_percentage <= 0.5:
+        ratio = error_percentage * 2
+        red = int(34 + (255 - 34) * ratio)
+        green = int(197 + (255 - 197) * ratio)
+        blue = int(94 + (0 - 94) * ratio)
+    
+    # Yellow → Red
+    else:
+        ratio = (error_percentage - 0.5) * 2
+        red = int(255 + (239 - 255) * ratio)
+        green = int(255 + (68 - 255) * ratio)
+        blue = int(0 + (68 - 0) * ratio)
+    
+    return f"rgb({red}, {green}, {blue})"

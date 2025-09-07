@@ -101,7 +101,7 @@ class Upstash:
         """Gets weight from Redis."""
         try:
             result = self.redis.get(f"{WEIGHTS_PREFIX}{date}")
-            return result
+            return float(result)
         
         except Exception as e:
             logger.error(f"Error fetching weight from Redis: {e}")

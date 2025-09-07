@@ -25,37 +25,35 @@ def add_user():
     """Displays add user form."""
     add_user_form = AddUserForm()
 
-    if request.method == "POST":
-
-        if not add_user_form.validate_on_submit():
-            session["form_errors"] = add_user_form.errors
-        
+    if not add_user_form.validate_on_submit():
+        session["form_errors"] = add_user_form.errors
+    
+    else:
+        username = add_user_form.username.data
+        password = add_user_form.password.data
+        # Verify connection
+        if upstash.redis is None:
+            flash("Not connected to Upstash")
+            logger.error("Upstash Redis connection is None")
+        # Verift not existing
+        elif upstash.get_user(username):
+            flash(f"User already exists: {username}")
+            logger.info(f"User already exists: {username=}")
+        # Add user
         else:
-            username = add_user_form.username.data
-            if upstash.get_user(username):
-                logger.info(f"User already exists: {username=}")
-                flash(f"User already exists: {username}")
-            
-            else:
-                password = add_user_form.password.data
-                added = upstash.add_user(username, password)
-                if not added:
-                    flash(f"Upstash not connected: {username}")
-                    logger.error(f"Erorr adding user to Upstash: {username=}")
-                    return redirect(url_for(CFG.redirect.add_user))
+            upstash.add_user(username, password)
+            flash(f"Added user: {username}")
+                
+        return redirect(url_for(CFG.redirect.add_user))
+    
+    form_errors = session.pop("form_errors", None)
 
-                logger.info(f"Added user: {username=}")
-                flash(f"Added user: {username}")
-            
-            return redirect(url_for(CFG.redirect.add_user))
-    
-    url = CFG.redirect.add_user
-    
     return render_template(
         CFG.template.add_user,
         title="Add user",
         add_user_form=add_user_form,
-        url=url,
+        form_errors=form_errors,
+        url=CFG.redirect.add_user,
     )
 
 
@@ -65,35 +63,36 @@ def add_user():
 def add_weight():
     """Displays add weight form."""
     add_weight_form = AddWeightForm()
-
+    
     if not add_weight_form.validate_on_submit():
         session["form_errors"] = add_weight_form.errors
     
     else:
         date = add_weight_form.date.data
         weight = float(add_weight_form.weight.data)
-        logger.info(f"Trying to add weight: {date=} {weight=}")
-
-        weight = upstash.get_weight(date)
-        if weight:
-            logger.info(f"Weight already exists: {date}: {weight}")
+        existing_weight = upstash.get_weight(date)
+        # Verify connection
+        if upstash.redis is None:
+            flash("Not connected to Upstash")
+            logger.error("Upstash Redis connection is None")
+        # Verify not existing
+        elif existing_weight:
             flash(f"Weight already exists: {date}")
-        
+            logger.info(f"Weight already exists: {date}: {existing_weight}")
+        # Add weight
         else:
-            added = upstash.add_weight(weight, date)
-            if not added:
-                flash(f"Upstash not connected: {date}")
-            else:
-                flash(f"Added weight: {date}: {weight}")
+            upstash.add_weight(weight, date)
+            flash(f"Added weight: {date}: {weight}")
+            logger.info(f"Added weight: {date=} {weight=}")
         
         return redirect(url_for(CFG.redirect.add_weight))
     
+    form_errors = session.pop("form_errors", None)
     
-    url = CFG.redirect.add_weight
-        
     return render_template(
-    CFG.template.add_weight,
-    title="Add Wwight",
-    add_weight_form=add_weight_form,
-    url=url,
+        CFG.template.add_weight,
+        title="Add Weight",
+        add_weight_form=add_weight_form,
+        form_errors=form_errors,
+        url=CFG.redirect.add_weight,
     )

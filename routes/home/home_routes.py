@@ -18,12 +18,12 @@ from .home_utils import (
     get_insta_paths,
     get_insta_title,
     get_image_path,
-    get_title
+    get_title,
+    get_guess_color,
 )
 from utils.misc import login_required
-from utils.config import CFG
-from utils.logger import logger
 from utils.upstash import upstash
+from utils.config import CFG
 
 
 home_bp = Blueprint("home", __name__)
@@ -44,28 +44,30 @@ def weight():
     """Displays weight images and month selection."""
     weight_guess_form = WeightGuessForm()
 
-    if request.method == "POST":
-
-        if not weight_guess_form.validate_on_submit():
-            session["form_errors"] = weight_guess_form.errors
-        
-        else:
-            weight = float(weight_guess_form.weight.data)
-            username = session["username"]
-            guess_date = datetime.now() + timedelta(days=1)
-            date = guess_date.strftime("%Y-%m-%d")
-            upstash.add_weight_guess(username, date, weight)
-
-            logger.info(f"Weight guess: {username=} {weight=}")
-            return redirect(url_for(CFG.redirect.weight))
+    if not weight_guess_form.validate_on_submit():
+        session["form_errors"] = weight_guess_form.errors
     
+    else:
+        weight = float(weight_guess_form.weight.data)
+        username = session["username"]
+        guess_date = datetime.now() + timedelta(days=1)
+        date = guess_date.strftime("%Y-%m-%d")
+        upstash.add_weight_guess(username, date, weight)
+        flash("Nice guess!")
+        return redirect(url_for(CFG.redirect.weight))
+    
+    # Get data
     guess_date, guess_weight = get_last_guess(session["username"])
     guess_result = upstash.get_weight(guess_date)
-
+    # Generate colored result
+    guess_color = ""
+    if guess_weight is not None and guess_result is not None:
+        guess_color = get_guess_color(guess_weight, guess_result)
+    
     form_errors = session.pop("form_errors", None)
     month = request.args.get('month')
     year = request.args.get('year')
-    
+
     img_path = get_image_path(year, month, CFG.dir.WEIGHT_REL)
     title = get_title(img_path, month)
     all_months = get_months_from_path(CFG.dir.WEIGHT)
@@ -84,6 +86,7 @@ def weight():
         guess_date=guess_date,
         guess_weight=guess_weight,
         guess_result=guess_result,
+        guess_color=guess_color,
     )
 
 

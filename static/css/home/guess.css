@@ -11,7 +11,7 @@
 
 .form-devider {
     margin-left: 20px;
-    margin-top: 15px;
+    margin-top: 11px;
 }
 
 .form-btn {
@@ -22,8 +22,8 @@
 
 .guess-view {
     display: grid;
-    grid-template-columns: 100px 100px;  /* Fixed width for both columns */
-    grid-column-gap: 30px;  /* This adds space between the columns */
+    grid-template-columns: 100px 100px;
+    grid-column-gap: 30px;
     margin: 8px 0;
     font-size: 1.1rem;
 }
@@ -34,12 +34,29 @@
     text-align: left;
 }
 
-/* Add this to right-align the values */
 .guess-view {
-    text-align: left;  /* This will right-align the values */
+    text-align: left;
 }
 
 .guess-view::before {
-    text-align: left;   /* Keep labels left-aligned */
-    float: left;        /* Ensure label alignment */
+    text-align: left;
+    float: left;
+}
+
+@media (max-width: 425px) {
+    .guess-view {
+        grid-template-columns: 110px 110px;
+        grid-column-gap: 15px;
+        margin: 6px 0;
+        font-size: 0.9rem;
+    }
+    .form-input-field {
+        font-size: 0.9rem;
+    }
+    .form-label {
+        font-size: 1rem;
+    }
+    .form-btn {
+        font-size: 1rem;
+    }
 }
