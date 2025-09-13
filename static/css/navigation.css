@@ -3,8 +3,18 @@ nav {
     text-align: center;
 }
 
+.nav-row {
+    margin-bottom: 10px;
+}
+
+.nav-row:last-child {
+    margin-bottom: 0;
+}
+
 nav ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 nav li {
@@ -23,16 +33,35 @@ nav li {
     font-weight: bold;
 }
 
-@media (max-width: 576px) {
-    .nav-link {
-        margin: 0 10px;
-        font-size: 14px;
+@media (min-width: 769px) {
+    .nav-regular {
+        display: block;
+    }
+    .nav-small-row-1,
+    .nav-small-row-2 {
+        display: none;
+    }
+    .nav-admin {
+        display: block;
     }
 }
 
-
-@media (min-width: 576px) and (max-width: 768px) {
+@media (max-width: 768px) {
+    .nav-regular {
+        display: none;
+    }
+    
+    .nav-small-row-1,
+    .nav-small-row-2 {
+        display: block;
+    }
+    .nav-admin {
+        display: block;
+    }
+    .nav-row {
+        margin-bottom: 10px;
+    }
     .nav-link {
-        font-size: 16px;
+        font-size: 19px;
     }
 }

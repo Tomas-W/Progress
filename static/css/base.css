@@ -1,13 +1,12 @@
 main {
     min-height: calc(100vh - 250px);
-    padding: 0 5%;
+    padding: 0 6%;
 }
 
 .header-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 95vw;
     margin: 40px auto;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--seperator);

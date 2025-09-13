@@ -5,17 +5,43 @@
 {% endblock %}
 
 <nav id="site-nav">
-    <ul>
-        <li><a href="{{ url_for('home.weight') }}" class="nav-link {% if endpoint == 'weight' %}is_current{% endif %}">Weight</a></li>
-        <li><a href="{{ url_for('home.calories') }}" class="nav-link {% if endpoint == 'calories' %}is_current{% endif %}">Calories</a></li>
-        <li><a href="{{ url_for('home.both') }}" class="nav-link {% if endpoint == 'both' %}is_current{% endif %}">Both</a></li>
-        <li><a href="{{ url_for('home.home') }}" class="nav-link {% if endpoint == 'home' %}is_current{% endif %}">Workouts</a></li>
-        <li><a href="{{ url_for('home.insta') }}" class="nav-link {% if endpoint == 'insta' %}is_current{% endif %}">Insta</a></li>
-        {% if session.username == "admin" or session.username == "test" %}
+    <!-- Wide screen (All on one line) -->
+    <div class="nav-row nav-regular">
+        <ul>
+            <li><a href="{{ url_for('home.weight') }}" class="nav-link {% if endpoint == 'weight' %}is_current{% endif %}">Weight</a></li>
+            <li><a href="{{ url_for('home.calories') }}" class="nav-link {% if endpoint == 'calories' %}is_current{% endif %}">Calories</a></li>
+            <li><a href="{{ url_for('home.both') }}" class="nav-link {% if endpoint == 'both' %}is_current{% endif %}">Both</a></li>
+            <li><a href="{{ url_for('home.home') }}" class="nav-link {% if endpoint == 'home' %}is_current{% endif %}">Workouts</a></li>
+            <li><a href="{{ url_for('home.insta') }}" class="nav-link {% if endpoint == 'insta' %}is_current{% endif %}">Insta</a></li>
+        </ul>
+    </div>
+    
+    <!-- Small screens (Top row) -->
+    <div class="nav-row nav-small-row-1">
+        <ul>
+            <li><a href="{{ url_for('home.weight') }}" class="nav-link {% if endpoint == 'weight' %}is_current{% endif %}">Weight</a></li>
+            <li><a href="{{ url_for('home.calories') }}" class="nav-link {% if endpoint == 'calories' %}is_current{% endif %}">Calories</a></li>
+            <li><a href="{{ url_for('home.both') }}" class="nav-link {% if endpoint == 'both' %}is_current{% endif %}">Both</a></li>
+        </ul>
+    </div>
+    
+    <!-- Small screens (Middle row) -->
+    <div class="nav-row nav-small-row-2">
+        <ul>
+            <li><a href="{{ url_for('home.home') }}" class="nav-link {% if endpoint == 'home' %}is_current{% endif %}">Workouts</a></li>
+            <li><a href="{{ url_for('home.insta') }}" class="nav-link {% if endpoint == 'insta' %}is_current{% endif %}">Insta</a></li>
+        </ul>
+    </div>
+    
+    <!-- Admin links (Bottom row) -->
+    {% if session.username == "admin" or session.username == "test" %}
+    <div class="nav-row nav-admin">
+        <ul>
             <li><a href="{{ url_for('admin.add_user') }}" class="nav-link {% if endpoint == 'add_user' %}is_current{% endif %}">AddUser</a></li>
             <li><a href="{{ url_for('admin.add_weight') }}" class="nav-link {% if endpoint == 'add_weight' %}is_current{% endif %}">AddWeight</a></li>
-        {% endif %}
-    </ul>
+        </ul>
+    </div>
+    {% endif %}
 </nav>
 
 {% endblock %}
