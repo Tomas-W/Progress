@@ -6,15 +6,13 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home/insta.css') }}">
 {% endblock %}
 
-  <div class="insta">
+  <div class="main-content">
+    
     <div class="header-wrapper">
       <p class="header">{{ title }}</p>
     </div>
 
     <div class="month-grid">
-      <!-- <div class="top-buttons">
-        <a href="{{ url_for(url) }}" class="month-button highlighted show-all-button {% if selected_month == None %}is_current_month{% endif %}">All</a>
-      </div> -->
 
       {% for item in all_months %}
         {% set month, year = item %}

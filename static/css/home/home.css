@@ -1,0 +1,103 @@
+.next-workout {
+    max-width: 700px;
+    margin: 0 auto 80px auto;
+}
+
+.next-workout-content {
+    background-color: var(--white-highlighted);
+    color: var(--text-hovered);
+    padding: 15px 20px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid var(--text-unhovered);
+    border-radius: 5px;
+    font-size: 1.1rem;
+}
+
+.previous-workout {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    padding: 20px;
+    border: 1px solid var(--text-unhovered);
+    border-radius: 8px;
+    background-color: var(--grey-modal);
+}
+
+.previous-workout h3 {
+    margin: 0 0 20px 0;
+    color: var(--text-hovered);
+    font-size: 1.2rem;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--seperator);
+}
+
+.previous-workout-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--text-unhovered);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.previous-workout-table th {
+    background-color: var(--white-highlighted);
+    color: var(--text-hovered);
+    padding: 15px 20px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 1px solid var(--text-unhovered);
+}
+
+.previous-workout-table th:not(:last-child) {
+    border-right: 1px solid var(--text-unhovered);
+}
+
+.previous-workout-table td {
+    padding: 12px 20px;
+    color: var(--text-unhovered);
+    border-bottom: 1px solid var(--seperator);
+}
+
+.previous-workout-table td:not(:last-child) {
+    border-right: 1px solid var(--seperator);
+}
+
+.previous-workout-table tr:last-child td {
+    border-bottom: none;
+}
+
+.previous-workout-table tr:hover td {
+    background-color: var(--white-highlighted);
+    color: var(--text-hovered);
+}
+
+
+@media (max-width: 576px) {
+    .previous-workout {
+        margin: 0 auto 25px auto;
+        padding: 15px;
+    }
+    
+    .previous-workout h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+    
+    .training-table th,
+    .training-table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    .next-workout {
+        margin: 0 auto 25px auto;
+    }
+    
+    .next-workout-content {
+        padding: 12px 50px;
+        font-size: 1rem;
+    }
+}

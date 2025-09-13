@@ -12,4 +12,46 @@
     </div>
 {% endif %}
 
+<div class="main-content">
+
+    <div class="header-wrapper">
+        <p class="header">{{ main_title }}</p>
+      </div>
+
+      <div class="next-workout">
+          <div class="next-workout-content">{{ next_workout }}</div>
+      </div>
+
+    <div class="header-wrapper">
+        <p class="header">{{ secondary_title }}</p>
+      </div>
+
+      <div class="previous-workouts">
+
+      {% for date_key, training_data in trainings.items() %}
+        <div class="previous-workout">
+            <h3>{{ training_data.date }}<span class="dash-separator">-</span>{{ training_data.duration }}</h3>
+            <table class="previous-workout-table">
+                <thead>
+                    <tr>
+                        <th>Exercise</th>
+                        <th>Reps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for exercise in training_data.exercises %}
+                        <tr>
+                            <td>{{ exercise.name }}</td>
+                            <td>{{ exercise.reps }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+
+    </div>
+
+</div>
+
 {% endblock %}

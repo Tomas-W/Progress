@@ -3,50 +3,50 @@
 {% block main_content %}
 
 {% block scripts %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin.css') }}">
-    <script defer src="{{ url_for('static', filename='js/admin.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin.css') }}">
+<script defer src="{{ url_for('static', filename='js/admin.js') }}"></script>
 {% endblock %}
 
-<div class="admin-form-wrapper">
+<div class="main-content">
 
     <div class="header-wrapper">
         <p class="header">{{ title }}</p>
     </div>
 
-            {% if get_flashed_messages() %}
-                <div class="add-user-flash">
-                    <p>{{ get_flashed_messages()[0] }}</p>
-                </div>
-            {% endif %}
+    {% if get_flashed_messages() %}
+    <div class="add-user-flash">
+        <p>{{ get_flashed_messages()[0] }}</p>
+    </div>
+    {% endif %}
 
-            <form method="POST" action="" novalidate class="admin-form">
+    <form method="POST" action="" novalidate class="admin-form">
 
-                <div class="form-item">
-                    <div class="input-error-wrapper">
-                        {{ add_weight_form.date(class="form-input-field") }}
-                        {% if add_weight_form.errors["date"] %}
-                            <div class="form-error">{{ add_weight_form.errors["date"][0] }}</div>
-                        {% endif %}
-                        <div class="form-label">{{ add_weight_form.date.label(class="form-label-color") }}</div>
-                    </div>
-                </div>
+        <div class="form-item">
+            <div class="input-error-wrapper">
+                {{ add_weight_form.date(class="form-input-field") }}
+                {% if add_weight_form.errors["date"] %}
+                <div class="form-error">{{ add_weight_form.errors["date"][0] }}</div>
+                {% endif %}
+                <div class="form-label">{{ add_weight_form.date.label(class="form-label-color") }}</div>
+            </div>
+        </div>
 
-                <div class="form-item last-form-item">
-                    <div class="input-error-wrapper">
-                        {{ add_weight_form.weight(class="form-input-field ") }}
-                        {% if add_weight_form.errors["weight"] %}
-                            <div class="form-error">{{ add_weight_form.errors["weight"][0] }}</div>
-                        {% endif %}
-                        <div class="form-label">{{ add_weight_form.weight.label(class="form-label-color") }}</div>
-                    </div>
-                </div>
-                
-                {{ add_weight_form.form_type }}
-                {{ add_weight_form.hidden_tag() }}
-                <div class="form-devider"> 
-                    {{ add_weight_form.submit(class="form-btn") }}
-                </div>
-            </form>
+        <div class="form-item last-form-item">
+            <div class="input-error-wrapper">
+                {{ add_weight_form.weight(class="form-input-field ") }}
+                {% if add_weight_form.errors["weight"] %}
+                <div class="form-error">{{ add_weight_form.errors["weight"][0] }}</div>
+                {% endif %}
+                <div class="form-label">{{ add_weight_form.weight.label(class="form-label-color") }}</div>
+            </div>
+        </div>
+
+        {{ add_weight_form.form_type }}
+        {{ add_weight_form.hidden_tag() }}
+        <div class="form-devider">
+            {{ add_weight_form.submit(class="form-btn") }}
+        </div>
+    </form>
 
 </div>
 

@@ -34,8 +34,19 @@ home_bp = Blueprint("home", __name__)
 @login_required
 def home():
     """Displays empty page."""
+    trainings = upstash.get_trainings()
+    url = CFG.redirect.home
+    main_title = "Next"
+    next_workout = "Sunday September 14th"
+    secondary_title = "Previous"
+
     return render_template(
         CFG.template.home,
+        trainings=trainings,
+        main_title=main_title,
+        next_workout=next_workout,
+        secondary_title=secondary_title,
+        url=url,
     )
 
 

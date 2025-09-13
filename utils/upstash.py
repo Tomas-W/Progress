@@ -9,6 +9,7 @@ from utils.logger import logger
 USERS_PREFIX: Final = "users_"
 WEIGHTS_PREFIX: Final = "weights_"
 WEIGHT_GUESSES_PREFIX: Final = "guess_weight_"
+TRAININGS_PREFIX: Final = "training_"
 
 
 class Upstash:
@@ -145,6 +146,44 @@ class Upstash:
         except Exception as e:
             logger.error(f"Error fetching weight guess from Redis: {e}")
             return None, None
+    
+    def get_trainings(self) -> dict[str, dict]:
+        """Gets all training data from Redis."""
+        try:
+            training_keys = self.redis.keys(f"{TRAININGS_PREFIX}*")
+            result = {}
+            
+            for training_key in training_keys:
+                training_data = self.redis.get(training_key)
+                
+                if training_data is not None:
+                    # Format: training_YYYY-MM-DD|duration|exercise_name|reps|exercise_name|reps|...
+                    date_key = training_key.replace(TRAININGS_PREFIX, "", 1)
+                    data_parts = training_data.split("|")
+                    
+                    # Date and duration
+                    workout_date = data_parts[0] if len(data_parts) > 0 else ""
+                    duration = data_parts[1] if len(data_parts) > 1 else ""
+                    
+                    # Exercises and reps
+                    exercises = []
+                    for i in range(2, len(data_parts), 2):
+                        if i + 1 < len(data_parts):
+                            exercise_name = data_parts[i]
+                            reps = data_parts[i + 1]
+                            exercises.append({"name": exercise_name, "reps": reps})
+                    
+                    result[date_key] = {
+                        "date": workout_date,
+                        "duration": duration,
+                        "exercises": exercises
+                    }
+            
+            return result
+        
+        except Exception as e:
+            logger.error(f"Error fetching trainings from Redis: {e}")
+            return {}
     
     def _get_user_from_memory(self, username: str) -> str | None:
         """Gets users from memory storage"""

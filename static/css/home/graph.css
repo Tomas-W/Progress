@@ -1,18 +1,8 @@
-.graph {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 0 3%;
-    box-sizing: border-box;
-}
-
 .graph-image {
     display: block;
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 2% 0 0;
 }
 
 .month-grid {
@@ -20,7 +10,7 @@
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 50px;
     grid-row-gap: 30px;
-    width: 96%;
+    padding: 0 2%;
     max-width: 1000px;
     margin: 40px 0;
 }
